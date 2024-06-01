@@ -1,0 +1,258 @@
+//imports fonts
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+//reset
+@import './reset';
+
+// variables and mixins
+@import './variables';
+@import './mixins';
+
+// components
+@import './navbar/navbar';
+@import './footer/footer';
+@import './form/form';
+@import './components/button';
+@import './components/card';
+@import './components/modal';
+
+//container
+@import './containers';
+
+
+// globales styles
+body {
+    font-family: $font-family-base;
+    background-color: $background-color;
+
+    @include for-phone-only {
+        font-size: 14px;
+    }
+    @include for-tablet-portrait-up {
+        font-size: 16px;
+    }
+    @include for-tablet-landscape-up {
+        font-size: 18px;
+    }
+    @include for-desktop-up {
+        font-size: 20px;
+    }
+    @include for-big-desktop-up {
+        font-size: 22px;
+    }
+}
+
+// Navbar
+.navbar {
+    @include container($container-width-lg, $container-height-xs, $container-padding-lg);
+    background-color: $primary-color;
+}
+
+// Footer
+.footer {
+    @include container($container-width-lg, $container-height-sm, $container-padding-md);
+    background-color: $secondary-color;
+}
+
+// Form
+.form {
+    @include container($container-width-md, auto, $container-padding-sm);
+    background-color: $gray-light;
+    border: 1px solid $gray;
+    border-radius: $border-radius-md;
+}
+
+// Card
+.card {
+    @include container($container-width-sm, auto, $container-padding-sm, $container-margin-sm);
+    background-color: $white;
+    box-shadow: $box-shadow-light;
+    border-radius: $border-radius-sm;
+}
+
+// Modal
+.modal {
+    @include container($container-width-md, $container-height-md, $container-padding-lg);
+    background-color: $white;
+    box-shadow: $box-shadow-dark;
+    border-radius: $border-radius-md;
+}
+
+//titles
+h1 {
+    font-size: $font-size-xxl;
+    font-weight: $font-weight-bold;
+    margin-bottom: $margin-lg;
+
+    @include for-phone-only {
+        font-size: $font-size-xl;
+    }
+
+    &.is-primary {
+        color: $primary-color;
+    }
+
+    &.is-secondary {
+        color: $secondary-color;
+    }
+
+    &.is-white {
+        color: $white;
+    }
+
+    &.is-gray {
+        color: $gray;
+    }
+
+    &.is-black {
+        color: $black;
+    }
+
+    &.is-center {
+        text-align: center;
+    }
+
+    &.is-right {
+        text-align: right;
+    }
+
+    &.is-left {
+        text-align: left;
+    }
+
+    &.is-uppercase {
+        text-transform: uppercase;
+    }
+
+    &.is-underline {
+        text-decoration: underline;
+    }
+
+    &.is-bold {
+        font-weight: $font-weight-bold;
+    }
+
+    &.is-light {
+        font-weight: $font-weight-light;
+    }
+}
+
+h2 {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    margin-bottom: $margin-md;
+
+    @include for-phone-only {
+        font-size: $font-size-lg;
+    }
+
+    @include for-phone-only {
+        font-size: $font-size-xl;
+    }
+
+    &.is-primary {
+        color: $primary-color;
+    }
+
+    &.is-secondary {
+        color: $secondary-color;
+    }
+
+    &.is-white {
+        color: $white;
+    }
+
+    &.is-gray {
+        color: $gray;
+    }
+
+    &.is-black {
+        color: $black;
+    }
+
+    &.is-center {
+        text-align: center;
+    }
+
+    &.is-right {
+        text-align: right;
+    }
+
+    &.is-left {
+        text-align: left;
+    }
+
+    &.is-uppercase {
+        text-transform: uppercase;
+    }
+
+    &.is-underline {
+        text-decoration: underline;
+    }
+
+    &.is-bold {
+        font-weight: $font-weight-bold;
+    }
+
+    &.is-light {
+        font-weight: $font-weight-light;
+    }
+}
+
+h3 {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    margin-bottom: $margin-sm;
+
+    @include for-phone-only {
+        font-size: $font-size-sm;
+    }
+
+    &.is-primary {
+        color: $primary-color;
+    }
+
+    &.is-secondary {
+        color: $secondary-color;
+    }
+
+    &.is-white {
+        color: $white;
+    }
+
+    &.is-gray {
+        color: $gray;
+    }
+
+    &.is-black {
+        color: $black;
+    }
+
+    &.is-center {
+        text-align: center;
+    }
+
+    &.is-right {
+        text-align: right;
+    }
+
+    &.is-left {
+        text-align: left;
+    }
+
+    &.is-uppercase {
+        text-transform: uppercase;
+    }
+
+    &.is-underline {
+        text-decoration: underline;
+    }
+
+    &.is-bold {
+        font-weight: $font-weight-bold;
+    }
+
+    &.is-light {
+        font-weight: $font-weight-light;
+    }
+}

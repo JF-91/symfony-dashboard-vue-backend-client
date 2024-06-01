@@ -1,0 +1,138 @@
+/* _form.scss */
+
+.form-group {
+    margin-bottom: 15px;
+    
+    label {
+        display: block;
+        margin-top: 6px;
+        margin-bottom: 5px;
+    }
+    
+    input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        outline: none;
+
+        &:focus {
+            border-color: $primary-color;
+        }
+        
+        @include for-phone-only {
+            padding: 8px;
+        }
+    }
+
+    input[type="submit"] {
+        background-color: $primary-color;
+        color: white;
+        border: none;
+        border-radius: $border-radius-md;
+        cursor: pointer;
+        
+        @include box-shadow(rgba(0, 0, 0, 0.15), 10px);
+        
+        @include for-phone-only {
+            width: 100%;
+        }
+        
+        @include for-tablet-portrait-up {
+            width: auto;
+        }
+        
+        &:hover {
+            background-color: darken($primary-color, 10%);
+        }
+    }
+
+    textArea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+
+        &:focus {
+            border-color: $primary-color;
+        }
+        
+        @include for-phone-only {
+            padding: 8px;
+        }
+
+        @include for-tablet-portrait-up {
+            width: auto;
+        }
+
+        @include for-tablet-landscape-up {
+            width: auto;
+        }
+    }
+
+    input[type="checkbox"] {
+        margin-right: 5px;
+        align-self: self-start;
+        width: 16px;
+        height: 16px;
+
+        &:focus {
+            border-color: $primary-color;
+        }
+
+        @include for-phone-only {
+            width: auto;
+            height: auto;
+        }
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: $primary-color;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        
+        @include box-shadow(rgba(0, 0, 0, 0.15), 10px);
+        
+        @include for-phone-only {
+            width: 100%;
+        }
+        
+        @include for-tablet-portrait-up {
+            width: auto;
+        }
+        
+        &:hover {
+            background-color: darken($primary-color, 10%);
+        }
+    }
+
+    .form-input {
+        margin-bottom: 8px;
+    }
+
+    .form-input-checkbox-md {
+        margin-top: 8px;
+        height: 28px;
+        width: 28px;
+    }
+
+    .terms-agreement-link {
+       display: none;
+    
+    }
+
+    .terms-agreement-label {
+        margin-top: 12px;
+        color: $primary-color;
+
+        &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}

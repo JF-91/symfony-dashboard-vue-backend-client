@@ -1,0 +1,46 @@
+/* _modal.scss */
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    z-index: 1000;
+    
+    @include box-shadow(rgba(0, 0, 0, 0.25), 15px);
+    
+    @include for-phone-only {
+        width: 90%;
+        padding: 15px;
+    }
+    
+    @include for-tablet-portrait-up {
+        width: 70%;
+    }
+    
+    @include for-desktop-up {
+        width: 50%;
+    }
+    
+    .modal-header {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+    
+    .modal-body {
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+    
+    .modal-footer {
+        text-align: right;
+        
+        .button {
+            margin-left: 10px;
+        }
+    }
+}

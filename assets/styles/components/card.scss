@@ -1,0 +1,25 @@
+/* _card.scss */
+
+.card {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
+    
+    @include box-shadow(rgba(0, 0, 0, 0.15), 10px);
+    
+    @include for-phone-only {
+        padding: 15px;
+        margin: 5px;
+    }
+    
+    .card-header {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+    
+    .card-body {
+        font-size: 1em;
+    }
+}

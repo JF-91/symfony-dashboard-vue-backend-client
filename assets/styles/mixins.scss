@@ -1,0 +1,50 @@
+// @mixin flex-center {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+// }
+
+
+/* _mixins.scss */
+
+/* Mixins para dispositivos */
+@mixin for-phone-only {
+    @media (max-width: 599px) { @content; }
+}
+
+@mixin for-tablet-portrait-up {
+    @media (min-width: 600px) { @content; }
+}
+
+@mixin for-tablet-landscape-up {
+    @media (min-width: 900px) { @content; }
+}
+
+@mixin for-desktop-up {
+    @media (min-width: 1200px) { @content; }
+}
+
+@mixin for-big-desktop-up {
+    @media (min-width: 1800px) { @content; }
+}
+
+/* Ejemplo de mixin para centrado flexible */
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Ejemplo de mixin para una caja sombreada */
+@mixin box-shadow($color, $blur) {
+    -webkit-box-shadow: 0 0 $blur $color;
+    -moz-box-shadow: 0 0 $blur $color;
+}
+
+@mixin container($width, $height: auto, $padding: $container-padding-md, $margin: $container-margin-md) {
+    width: $width;
+    height: $height;
+    padding: $padding;
+    margin: $margin auto;
+    box-sizing: border-box;
+}

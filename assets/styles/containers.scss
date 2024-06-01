@@ -1,0 +1,67 @@
+@import 'variables';
+@import 'mixins';
+
+.container {
+  @include container($container-width-md); // Utiliza el tamaño de contenedor medio por defecto
+}
+
+.container-xs {
+  @include container($container-width-xs);
+}
+
+.container-sm {
+  @include container($container-width-sm);
+}
+
+.container-lg {
+  @include container($container-width-lg);
+}
+
+.container-xl {
+  @include container($container-width-xl);
+}
+
+.container-fluid {
+  width: 100%;
+  height: auto;
+  padding: $container-padding-lg;
+  margin: 0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax($container-width-md, 1fr)); // Usa el ancho de contenedor medio por defecto
+    gap: $spacing-md; // Espacio entre las columnas
+}
+  
+.grid-container-xs {
+    @include for-phone-only {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax($container-width-xs, 1fr)); // Ancho de contenedor extra pequeño
+        gap: $spacing-xs; // Espacio entre las columnas
+    }
+}
+  
+.grid-container-sm {
+    @include for-tablet-portrait-up {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax($container-width-sm, 1fr)); // Ancho de contenedor pequeño
+        gap: $spacing-sm; // Espacio entre las columnas
+    }
+}
+  
+.grid-container-lg {
+    @include for-desktop-up {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax($container-width-lg, 1fr)); // Ancho de contenedor grande
+      gap: $spacing-lg; // Espacio entre las columnas
+    }
+}
+  
+.grid-container-xl {
+    @include for-big-desktop-up {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax($container-width-xl, 1fr)); // Ancho de contenedor extra grande
+      gap: $spacing-xl; // Espacio entre las columnas
+    }
+}
