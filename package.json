@@ -25,6 +25,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "vue-router": "^4.3.2",
         "vuetify": "^3.6.8"
     }
 }

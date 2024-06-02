@@ -1,20 +1,23 @@
 <template>
-    <div class="container">
-        <h1 class="title">Hello, {{ name }}</h1>
-
-        <v-btn>
-            Button
-        </v-btn>
+    <div class="container"> 
+        <div class="links-container">
+            <a class="link" :href="toLogin">Login</a>
+            <a class="link" :href="toRegister">Register</a>
+        </div>
     </div>
 </template>
 
 <script setup>
 defineProps({
-    name: String
+    toLogin: String,
+    toRegister: String,
+    toForgot: String,
 });
 </script>
 
 <style lang="scss" scoped>
+
+@import "../../styles/app.scss";
 .container {
     display: flex;
     justify-content: center;
@@ -25,12 +28,16 @@ defineProps({
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.title {
-    font-size: 24px;
-    color: #333;
 
-    &:hover {
-        color: #f00;
-    }
+.links-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.link {
+    margin: 0 10px;
+    font-size: 18px;
 }
 </style>

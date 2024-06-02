@@ -7,6 +7,14 @@
         display: block;
         margin-top: 6px;
         margin-bottom: 5px;
+
+        &.margin-bottom-sm {
+            margin-bottom: 8px;
+        }
+
+        @include for-phone-only {
+            font-size: 14px;
+        }
     }
     
     input {
@@ -53,6 +61,8 @@
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 4px;
+        outline: none;
+        box-sizing: border-box;
 
         &:focus {
             border-color: $primary-color;
@@ -89,6 +99,7 @@
 
     button {
         margin-top: 20px;
+        margin-bottom: 20px;
         padding: 10px 20px;
         background-color: $primary-color;
         color: white;
@@ -134,5 +145,45 @@
             text-decoration: underline;
             cursor: pointer;
         }
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: $margin-md;
+
+        tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    }
+    
+    a {
+        margin-top: $margin-xl;
+        margin-right: $margin-md;
+    }
+
+    .form-error {
+        color: red;
+        margin-top: 5px;
+    }
+
+    .form-success {
+        color: green;
+        margin-top: 5px;
+    }
+
+    .form-warning {
+        color: orange;
+        margin-top: 5px;
     }
 }
