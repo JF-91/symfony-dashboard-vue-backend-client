@@ -8,6 +8,7 @@
 </template>
 
 <script setup>
+
 defineProps({
     toLogin: String,
     toRegister: String,
@@ -16,7 +17,6 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
-
 @import "../../styles/app.scss";
 .container {
     display: flex;
