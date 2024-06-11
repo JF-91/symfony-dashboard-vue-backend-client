@@ -4,7 +4,7 @@ import { useTheme } from "vuetify";
 
 
 const theme = useTheme();
-const myThemes = ["customThemeLight", "customDarkTheme"];
+const myThemes = ["light", "dark"];
 const selectedTheme = ref(myThemes[0]);
 
 const setTheme = () => {
@@ -23,17 +23,17 @@ const setTheme = () => {
         <v-spacer></v-spacer>
 
         <div class="container-links">
-            <router-link to="/">
+            <router-link :to="{name: 'home'}">
                 <v-btn color="secondary" variant="flat">Home</v-btn>
             </router-link>
 
-            <router-link to="/about">
-                <v-btn color="secondary" variant="flat">About</v-btn>
+            <router-link :to="{name: 'posts'}">
+                <v-btn color="secondary" variant="flat">Post</v-btn>
             </router-link>
 
-            <router-link to="/contact">
+            <!-- <router-link to="/contact">
                 <v-btn color="secondary" variant="flat">Contact</v-btn>
-            </router-link>
+            </router-link> -->
 
         </div>
 
@@ -51,5 +51,9 @@ const setTheme = () => {
     margin: 0 2rem;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 600px) {
+        width: 50%;
+    }
 }
 </style>

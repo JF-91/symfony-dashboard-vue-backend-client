@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class AdminController extends AbstractController
 {
-    #[Route('/admin', requirements: ['route' => '.*'], name: 'app_admin')]
+    #[Route('/admin/{route}', requirements: ['route' => '.*'], name: 'app_admin')]
     public function index(): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
