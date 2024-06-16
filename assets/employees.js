@@ -2,8 +2,8 @@ import './bootstrap.js';
 import './styles/app.scss';
 import { registerVueControllerComponents } from '@symfony/ux-vue';
 import { createApp } from 'vue';
-import DashboardApp from "./views/DashboardApp.vue";
-import router from './router/app.js';
+import EmployeesDashboard from "./views/EmployeesDashboard.vue";
+import router from "./router/employees.js";
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
@@ -16,7 +16,7 @@ const vuetify = createVuetify({
 
 registerVueControllerComponents(require.context('./vue/controllers', true, /\.vue$/));
 
-createApp(DashboardApp)
+createApp(EmployeesDashboard)
     .use(router)
     .use(vuetify)
-    .mount('#app');
+    .mount('#employees');

@@ -2,40 +2,74 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\PostRepository;
+use Carbon\Carbon;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
-#[ApiResource()]
+
+#[ApiResource(
+    normalizationContext: ['groups' => ['read']],
+    denormalizationContext: ['groups' => ['write']],
+    paginationItemsPerPage: 10,
+)]
+#[ApiFilter(BooleanFilter::class, properties: ['isPublished'])]
 class Post
 {
+
+    public function __construct() {
+        $this->createdAt = new \DateTimeImmutable();
+    }
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
+
+    #[Groups(['read', 'write'])]
+    #[ApiFilter(SearchFilter::class, strategy: 'partial')]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 3, max: 180, maxMessage: 'The title must be less than 180 characters')]
     private ?string $title = null;
+
+    #[Groups(['read', 'write'])]
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    private ?\DateTimeImmutable $createdAt;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[Groups(['read', 'write'])]
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $url_img = null;
+
+    #[Groups(['read', 'write'])]
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $img_path = null;
 
+    #[Groups(['read', 'write'])]
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $link = null;
+
+    #[Groups(['read', 'write'])]
+    #[ORM\Column]
+    private ?bool $isPublished = false;
 
     public function getId(): ?int
     {
@@ -66,17 +100,32 @@ class Post
         return $this;
     }
 
+
+    #[Groups(['read'])]
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    /*
+    *Return the date in a human readable format
+    */
+    #[Groups(['read'])]
+    public function getHumanCreatedAt(): string
     {
-        $this->createdAt = $createdAt;
-
-        return $this;
+        return Carbon::instance($this->createdAt)->diffForHumans();
     }
+
+
+    /*
+    * Return the text description without html tags
+    */
+    #[Groups(['read'])]
+    public function getTextDescription(): string
+    {
+        return strip_tags($this->description);
+    }
+
 
     public function getUpdatedAt(): ?\DateTimeImmutable
     {
@@ -89,7 +138,7 @@ class Post
 
         return $this;
     }
-
+    
     public function getUrlImg(): ?string
     {
         return $this->url_img;
@@ -122,6 +171,18 @@ class Post
     public function setLink(?string $link): static
     {
         $this->link = $link;
+
+        return $this;
+    }
+
+    public function isPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setPublished(bool $isPublished): static
+    {
+        $this->isPublished = $isPublished;
 
         return $this;
     }

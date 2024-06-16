@@ -1,6 +1,5 @@
 import { createRouter, createMemoryHistory } from "vue-router";
 
-
 const routes = [
     {
         path: "/",
@@ -10,7 +9,7 @@ const routes = [
     {
         path: "/posts",
         name: "posts",
-        component: () => import(/* webpackChunkName: "posts" */ "../pages/post/Post.vue"),
+        component: () => import(/* webpackChunkName: "posts" */ "../pages/employees/Posts.vue"),
     }
 ];
 

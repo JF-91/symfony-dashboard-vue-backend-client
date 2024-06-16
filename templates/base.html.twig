@@ -7,17 +7,18 @@
 
         {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
+        {{ encore_entry_link_tags('employees') }}
         {% endblock %}
 
         {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
+        {{ encore_entry_script_tags('employees') }}
         {% endblock %}
     </head>
     <body>
         {% block body %}
-        <div id="app">
-            <App />
-        </div>
+        <div id="app"></div>
+        <div id="employees"></div>
         {% endblock %}
     </body>
 </html>
