@@ -19,7 +19,6 @@ class HomeController extends AbstractController
             'appName' => $appName,
             'toLogin' => $toLogin,
             'toRegister' => $toRegister,
-            // 'toForgot' => $toForgot,
         ]);
     }
 }

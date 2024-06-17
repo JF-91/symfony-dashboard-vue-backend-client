@@ -11,8 +11,10 @@ class AdminController extends AbstractController
     #[Route('/admin/{route}', requirements: ['route' => '.*'], name: 'app_admin')]
     public function index(): Response
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $user = $this->getUser();
-        return $this->render('admin/index.html.twig');
+        return $this->render('admin/index.html.twig', [
+            'user' => $user,
+        ]);
     }
 }

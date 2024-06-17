@@ -47,10 +47,11 @@ const setTheme = () => {
 <style lang="scss" scoped>
 .container-links {
     display: flex;
-    width: 20%;
+    width: 30%;
     margin: 0 2rem;
     justify-content: space-between;
     align-items: center;
+   
 
     @media (max-width: 600px) {
         width: 50%;

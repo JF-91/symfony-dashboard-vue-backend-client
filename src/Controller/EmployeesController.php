@@ -11,7 +11,10 @@ class EmployeesController extends AbstractController
     #[Route('/employees', name: 'app_employees')]
     public function index(): Response
     {
-      
-        return $this->render('employees/index.html.twig');
+        $this->denyAccessUnlessGranted('ROLE_EMPLOYEE');
+        $user = $this->getUser();
+        return $this->render('employees/index.html.twig', [
+            'user' => $user,
+        ]);
     }
 }

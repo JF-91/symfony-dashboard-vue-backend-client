@@ -6,6 +6,7 @@ use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Doctrine\Orm\Filter\BooleanFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
+use App\Enums\PostTypeEnum;
 use App\Repository\PostRepository;
 use Carbon\Carbon;
 use Doctrine\DBAL\Types\Types;
@@ -16,8 +17,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 
 #[ApiResource(
-    normalizationContext: ['groups' => ['read']],
-    denormalizationContext: ['groups' => ['write']],
+    normalizationContext: ['groups' => ['post:read']],
+    denormalizationContext: ['groups' => ['post:write']],
     paginationItemsPerPage: 10,
 )]
 #[ApiFilter(BooleanFilter::class, properties: ['isPublished'])]
@@ -35,14 +36,19 @@ class Post
 
     #[ORM\Column(length: 180)]
 
-    #[Groups(['read', 'write'])]
+    #[Groups(['post:read', 'post:write'])]
     #[ApiFilter(SearchFilter::class, strategy: 'partial')]
     #[Assert\NotBlank]
     #[Assert\Length(min: 3, max: 180, maxMessage: 'The title must be less than 180 characters')]
     private ?string $title = null;
 
-    #[Groups(['read', 'write'])]
-
+    #[Groups(['post:read', 'post:write'])]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 3, max: 10000, maxMessage: 'The description must be less than 10000 characters')]
+    #[Assert\Regex(
+        pattern: '/<p>(.*?)<\/p>/',
+        message: 'The description must be a valid HTML'
+    )]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
@@ -52,24 +58,38 @@ class Post
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[Groups(['read', 'write'])]
-
+    #[Groups(['post:read', 'post:write'])]
+    #[Assert\Url]
+    #[Assert\Length(min: 3, max: 255, maxMessage: 'The URL must be less than 255 characters')]
+    #[Assert\Regex(
+        pattern: '/(http|https):\/\/[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,}(\/\S*)?/',
+        message: 'The URL must be a valid URL'
+    )]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $url_img = null;
 
-    #[Groups(['read', 'write'])]
+    #[Groups(['post:read', 'post:write'])]
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $img_path = null;
 
-    #[Groups(['read', 'write'])]
+    #[Groups(['post:read', 'post:write'])]
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Assert\Url]
     private ?string $link = null;
 
-    #[Groups(['read', 'write'])]
+    #[Groups(['post:read', 'post:write'])]
     #[ORM\Column]
     private ?bool $isPublished = false;
+
+    #[Groups(['post:read', 'post:write'])]
+    #[ORM\ManyToOne(inversedBy: 'posts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
+    #[ORM\Column(type: Types::STRING, length: 255, enumType: PostTypeEnum::class, options: ['default' => PostTypeEnum::UNKNOWN])]
+    private PostTypeEnum $type;
 
     public function getId(): ?int
     {
@@ -101,7 +121,7 @@ class Post
     }
 
 
-    #[Groups(['read'])]
+    #[Groups(['post:read'])]
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
@@ -110,7 +130,7 @@ class Post
     /*
     *Return the date in a human readable format
     */
-    #[Groups(['read'])]
+    #[Groups(['post:read'])]
     public function getHumanCreatedAt(): string
     {
         return Carbon::instance($this->createdAt)->diffForHumans();
@@ -120,7 +140,7 @@ class Post
     /*
     * Return the text description without html tags
     */
-    #[Groups(['read'])]
+    #[Groups(['post:read'])]
     public function getTextDescription(): string
     {
         return strip_tags($this->description);
@@ -183,6 +203,30 @@ class Post
     public function setPublished(bool $isPublished): static
     {
         $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getType(): PostTypeEnum
+    {
+        return $this->type;
+    }
+
+    public function setType(PostTypeEnum $type): static
+    {
+        $this->type = $type;
 
         return $this;
     }
